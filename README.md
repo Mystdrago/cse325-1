@@ -36,6 +36,28 @@ The files/directories exercise was expanded to generate a `sales-summary.txt` re
 
 The report uses `StringBuilder` to construct the output and currency formatting to display the sales amounts.
 
+### Sales Summary Function
+
+```csharp
+void GenerateSalesSummary(double total, Dictionary<string, double> details, string storesDirectory, string outputFile)
+{
+    StringBuilder report = new StringBuilder();
+
+    report.AppendLine("Sales Summary");
+    report.AppendLine("----------------------------");
+    report.AppendLine($" Total Sales: {total:C}");
+    report.AppendLine();
+    report.AppendLine(" Details:");
+
+    foreach (var detail in details)
+    {
+        report.AppendLine($"  {Path.GetRelativePath(storesDirectory, detail.Key)}: {detail.Value:C}");
+    }
+
+    File.WriteAllText(outputFile, report.ToString());
+}
+```
+
 ## Microsoft Learn Modules
 
 The repository contains work from the required Microsoft Learn modules:
@@ -44,5 +66,7 @@ The repository contains work from the required Microsoft Learn modules:
 2. Introduction to .NET
 3. Create a new .NET project and work with dependencies
 4. Interactively debug .NET apps with VS Code debugger
+5. Work with files and directories in a .NET app
+6. Create a web API with ASP.NET Core controllers
 5. Work with files and directories in a .NET app
 6. Create a web API with ASP.NET Core controllers
